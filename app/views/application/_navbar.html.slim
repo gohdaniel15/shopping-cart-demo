@@ -1,5 +1,4 @@
 ul.nav.justify-content-center
-  li.nav-item
-    = link_to 'Sign Out', '#', class: 'nav-link active'
-  li.nav-item
-    a.nav-link
+  - if current_user
+    li.nav-item
+      = link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link'
