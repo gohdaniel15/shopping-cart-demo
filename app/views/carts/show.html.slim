@@ -1,0 +1,14 @@
+= link_to 'Product index', products_path
+
+table
+  thead
+    th Product Name
+    th Product Price
+    th
+
+  tbody
+    - @products.each do |product|
+      tr
+        td = product.name
+        td = product.price
+        td = link_to 'Remove from cart', remove_from_cart_path(product), method: :delete

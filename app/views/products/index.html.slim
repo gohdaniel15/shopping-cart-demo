@@ -1,0 +1,14 @@
+= link_to 'Show cart', cart_path
+
+table
+  thead
+    th Product Name
+    th Product Price
+    th
+
+  tbody
+    - @products.each do |product|
+      tr
+        td = product.name
+        td = product.price
+        td = link_to 'Add to cart', add_to_cart_path(product), method: :post

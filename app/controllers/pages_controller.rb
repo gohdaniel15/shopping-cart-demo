@@ -5,4 +5,9 @@ class PagesController < ApplicationController
   def home
   end
 
+  def sendmail
+    UserMailer.welcome(current_user.email).deliver_later
+    redirect_to home_path
+  end
+
 end
