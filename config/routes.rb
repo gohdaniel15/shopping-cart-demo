@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'transactions/new'
+
+  post 'transactions/create'
+
   devise_for :admins
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
@@ -18,5 +22,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :products
   end
+
+  get '/apis/retrieve', to: 'apis#retrieve'
 
 end

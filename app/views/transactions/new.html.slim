@@ -1,0 +1,10 @@
+.form-container
+  h2.mbs New Transaction
+
+  = form_tag transactions_create_path do
+
+    p Please enter your payment details:
+
+    #dropin
+
+    = submit_tag "Pay #{current_user.cart_total_price}$", class: "button mt1"

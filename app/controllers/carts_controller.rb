@@ -1,19 +1,30 @@
 class CartsController < ApplicationController
 
-  before_action :authenticate_user!
-
   def show
-    cart_ids = $redis.smembers current_user_cart
+    if current_user
+      cart_ids = $redis.smembers current_user_cart
+    else
+      cart_ids = session[:cart] || []
+    end
     @products = Product.find(cart_ids)
   end
 
   def add
-    $redis.sadd current_user_cart, params[:product_id]
+    if current_user
+      $redis.sadd current_user_cart, params[:product_id]
+    else
+      session[:cart] ||= []
+      session[:cart] << params[:product_id]
+    end
     redirect_to products_path
   end
 
   def remove
-    $redis.srem current_user_cart, params[:product_id]
+    if current_user
+      $redis.srem current_user_cart, params[:product_id]
+    else
+      session[:cart].delete(params[:product_id])
+    end
     redirect_to products_path
   end
 
