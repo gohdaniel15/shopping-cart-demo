@@ -1,4 +1,5 @@
-= link_to 'Show cart', cart_path
+= link_to cart_path do
+  = "Cart (#{current_user.current_cart.size})"
 
 table
   thead

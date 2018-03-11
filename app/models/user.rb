@@ -21,4 +21,8 @@ class User < ApplicationRecord
     end
   end
 
+  def current_cart
+    $redis.smembers "cart#{self.id}"
+  end
+
 end
