@@ -3,10 +3,6 @@ class TransactionsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    if session[:cart]
-      $redis.sadd(current_user_cart, session[:cart])
-      session[:cart] = []
-    end
     gon.client_token = generate_client_token
   end
 
@@ -28,10 +24,6 @@ class TransactionsController < ApplicationController
 
   def generate_client_token
     Braintree::ClientToken.generate
-  end
-
-  def current_user_cart
-    "cart#{current_user.id}"
   end
 
 end
